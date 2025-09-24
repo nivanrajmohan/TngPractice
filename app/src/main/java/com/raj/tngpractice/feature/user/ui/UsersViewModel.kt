@@ -22,6 +22,10 @@ class UsersViewModel @Inject constructor(
     private val companyList = mutableSetOf<String>()
     private var isCurrentlyInAscendingOrder = true
 
+    init {
+        companyList.add("All Company")
+    }
+
     fun onUserUIEvent(uiEvent: UsersUiEvent) {
         when(uiEvent) {
             is UsersUiEvent.RequestUserData -> fetchUserData()
@@ -48,7 +52,7 @@ class UsersViewModel @Inject constructor(
     private fun processCompanySelection(selectedCompanyName : String) {
         viewModelScope.launch {
             _userUIStateChannel.send(UsersUiState.UpdateLoadingProgress(true))
-            if (selectedCompanyName.isEmpty()) {
+            if (selectedCompanyName == "All Company") {
                 _userUIStateChannel.send(UsersUiState.UpdateUserList(totalUserList))
             } else {
                 val filteredList = totalUserList.filter { it.company.name == selectedCompanyName }
@@ -63,10 +67,12 @@ class UsersViewModel @Inject constructor(
             _userUIStateChannel.send(UsersUiState.UpdateLoadingProgress(true))
             if (isCurrentlyInAscendingOrder) {
                 isCurrentlyInAscendingOrder = false
-                _userUIStateChannel.send(UsersUiState.UpdateUserList(totalUserList.sortedByDescending { it.name }))
+                totalUserList = totalUserList.sortedByDescending { it.name }
+                _userUIStateChannel.send(UsersUiState.UpdateUserList(totalUserList))
             } else {
                 isCurrentlyInAscendingOrder = true
-                _userUIStateChannel.send(UsersUiState.UpdateUserList(totalUserList.sortedBy { it.name }))
+                totalUserList = totalUserList.sortedBy { it.name }
+                _userUIStateChannel.send(UsersUiState.UpdateUserList(totalUserList))
             }
             _userUIStateChannel.send(UsersUiState.UpdateLoadingProgress(false))
         }

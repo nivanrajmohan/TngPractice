@@ -45,6 +45,7 @@ class UsersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loading = LoadingDialog()
         viewModel.onUserUIEvent(UsersUiEvent.RequestUserData)
+        usersBinding.rvUser.adapter = userAdapter
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userUiState.collect {
@@ -78,7 +79,7 @@ class UsersFragment : Fragment() {
             tvErrorMessage.apply {
                 setTextColor(Color.BLACK)
                 text = getString(R.string.no_record_found)
-                visibility = if (users.isNotEmpty()) VISIBLE else GONE
+                visibility = if (users.isEmpty()) VISIBLE else GONE
             }
             atCompany.apply {
                 setAdapter(adapter)
