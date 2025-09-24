@@ -2,4 +2,6 @@
     <string name="app_name">TNGPractice</string>
     <string name="network_unavailable">Network not available, please check your internet connection and refresh again</string>
     <string name="data_not_found">Data not found in server, please try again</string>
+    <string name="filter_by_company">-- Filter By Company --</string>
+    <string name="no_record_found">No record found</string>
 </resources>
