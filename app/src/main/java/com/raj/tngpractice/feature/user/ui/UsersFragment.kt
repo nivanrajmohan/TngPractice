@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class UsersFragment : Fragment() {
+class UsersFragment : Fragment(), View.OnClickListener {
 
     private var _usersBinding : FragmentUsersBinding? = null
     private val usersBinding get() = _usersBinding!!
@@ -45,7 +45,11 @@ class UsersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loading = LoadingDialog()
         viewModel.onUserUIEvent(UsersUiEvent.RequestUserData)
-        usersBinding.rvUser.adapter = userAdapter
+        usersBinding.apply {
+            rvUser.adapter = userAdapter
+            ivSort.setOnClickListener(this@UsersFragment)
+            ivRefresh.setOnClickListener(this@UsersFragment)
+        }
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.userUiState.collect {
@@ -97,6 +101,15 @@ class UsersFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _usersBinding = null
+    }
+
+    override fun onClick(view: View?) {
+        view?.let {
+            when(it) {
+                usersBinding.ivSort -> viewModel.onUserUIEvent(UsersUiEvent.SortUser)
+                usersBinding.ivRefresh -> viewModel.onUserUIEvent(UsersUiEvent.RequestUserData)
+            }
+        }
     }
 
 }

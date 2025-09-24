@@ -32,6 +32,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/ivSort"
         android:src="@drawable/baseline_sort_24"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintTop_toTopOf="@id/tilCompany"
+        app:layout_constraintEnd_toStartOf="@id/ivRefresh"
+        app:layout_constraintBottom_toBottomOf="@id/tilCompany"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivRefresh"
+        android:src="@drawable/baseline_refresh_24"
         app:layout_constraintTop_toTopOf="@id/tilCompany"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/tilCompany"/>

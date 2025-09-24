@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.raj.tngpractice.R
 import com.raj.tngpractice.databinding.ListUserBinding
 import com.raj.tngpractice.feature.user.model.User
 
@@ -17,17 +18,18 @@ class UserAdapter : ListAdapter<User, UserAdapter.UserHolder>(DIFFUtilItemCallba
 
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         val user = currentList[position]
+        val address = user.address.suite.plus(" ")
+            .plus(user.address.street).plus(" ")
+            .plus(user.address.city).plus(" ")
+            .plus(user.address.zipcode).plus(" ")
         holder.listUserBinding.apply {
-            tvName.text = user.name
-            tvEmail.text = user.email
-            tvAddress.text = user.address.suite.plus(" ")
-                .plus(user.address.street).plus(" ")
-                .plus(user.address.city).plus(" ")
-                .plus(user.address.zipcode).plus(" ")
-            tvPhone.text = user.phone
-            tvWebsite.text = user.website
-            tvCompanyName.text = user.website
-            tvCatchPhrase.text = user.company.catchPhrase
+            tvName.text = holder.itemView.context.getString(R.string.name_, user.name)
+            tvEmail.text = holder.itemView.context.getString(R.string.email_, user.email)
+            tvAddress.text = holder.itemView.context.getString(R.string.address_, address)
+            tvPhone.text = holder.itemView.context.getString(R.string.phone_, user.phone)
+            tvWebsite.text = holder.itemView.context.getString(R.string.website_, user.website)
+            tvCompanyName.text = holder.itemView.context.getString(R.string.company_name, user.company.name)
+            tvCatchPhrase.text = holder.itemView.context.getString(R.string.catchphrase_, user.company.catchPhrase)
         }
     }
 

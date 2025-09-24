@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="loading">Loading...</string>
+    <string name="name_">Name : %1$s</string>
+    <string name="email_">Email : %1$s</string>
+    <string name="address_">Address : %1$s</string>
+    <string name="phone_">Phone : %1$s</string>
+    <string name="website_">Website : %1$s</string>
+    <string name="company_name">Company Name : %1$s</string>
+    <string name="catchphrase_">Catchphrase : %1$s</string>
 </resources>
