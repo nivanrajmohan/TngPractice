@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt)
+    id("kotlin-kapt")
 }
 
 android {
@@ -52,7 +53,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.hilt.android)
-    annotationProcessor(libs.hilt.compiler)
+    kapt(libs.hilt.compiler)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.kotlinx.serialization.json)
