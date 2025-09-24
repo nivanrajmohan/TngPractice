@@ -17,9 +17,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.raj.tngpractice.R
 import com.raj.tngpractice.databinding.FragmentUsersBinding
 import com.raj.tngpractice.feature.general.ui.LoadingDialog
+import com.raj.tngpractice.feature.user.adapter.UserAdapter
 import com.raj.tngpractice.feature.user.model.User
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class UsersFragment : Fragment() {
@@ -28,6 +30,7 @@ class UsersFragment : Fragment() {
     private val usersBinding get() = _usersBinding!!
     private val viewModel by viewModels<UsersViewModel>()
     private lateinit var loading : LoadingDialog
+    @Inject lateinit var userAdapter: UserAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,11 +85,12 @@ class UsersFragment : Fragment() {
                 setOnItemClickListener { _, _, i, _ -> viewModel.onUserUIEvent(UsersUiEvent.ProcessCompanySelection(companyNames[i])) }
             }
         }
+        userAdapter.submitList(users)
     }
 
     private fun updateUserList(users: List<User>) {
         val list = mutableListOf<User>().apply { addAll(users) }
-
+        userAdapter.submitList(list)
     }
 
     override fun onDestroyView() {
