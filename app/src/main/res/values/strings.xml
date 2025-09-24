@@ -4,4 +4,5 @@
     <string name="data_not_found">Data not found in server, please try again</string>
     <string name="filter_by_company">-- Filter By Company --</string>
     <string name="no_record_found">No record found</string>
+    <string name="loading">Loading...</string>
 </resources>
