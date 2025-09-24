@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TNGPractice</string>
     <string name="network_unavailable">Network not available, please check your internet connection and refresh again</string>
+    <string name="data_not_found">Data not found in server, please try again</string>
 </resources>
