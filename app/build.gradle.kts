@@ -57,7 +57,6 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.scalar)
     implementation(libs.retrofit.converter.gson)
-    implementation(libs.conscrypt)
     testImplementation(libs.junit)
     testImplementation(libs.roboelectric)
     testImplementation(libs.mockk)
@@ -67,7 +66,6 @@ dependencies {
     testImplementation(libs.coroutine.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.roboelectric)
 }
 
 afterEvaluate {

@@ -47,12 +47,13 @@ class UserViewModelTest {
     fun fetchUserData_withAPISuccess_ShouldUpdateUI() = runTest {
         val dummyCompany = CompanyItem(name = "Testing")
         val dummyList = listOf(User(company = dummyCompany))
+        val dummyCompanySet = setOf("All Company", dummyCompany.name)
         coEvery { userRepository.fetchAllUsers() } returns Resource.Success(dummyList)
         usersViewModel.userUiState.test {
             usersViewModel.onUserUIEvent(UsersUiEvent.RequestUserData)
             assertThat(awaitItem()).isEqualTo(UsersUiState.UpdateLoadingProgress(true))
             coVerify(exactly = 1) { userRepository.fetchAllUsers() }
-            assertThat(awaitItem()).isEqualTo(UsersUiState.UpdatePageUI(setOf(dummyCompany.name), dummyList))
+            assertThat(awaitItem()).isEqualTo(UsersUiState.UpdatePageUI(dummyCompanySet, dummyList))
             assertThat(awaitItem()).isEqualTo(UsersUiState.UpdateLoadingProgress(false))
             expectNoEvents()
         }
